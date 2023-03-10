@@ -96,7 +96,7 @@ class PublicUserApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_token_email_not_found(self):
-        """TTest error returned if user not found for given email."""
+        """Test error returned if user not found for given email."""
         payload = {'email': 'test@example.com', 'password': 'pass123'}
         res = self.client.post(TOKEN_URL, payload)
 
@@ -129,7 +129,7 @@ class PrivateUserApiTests(TestCase):
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
 
-    def test_retrieve_profile_sucess(self):
+    def test_retrieve_profile_success(self):
         """Test retrieving profile for logged in user."""
         res = self.client.get(ME_URL)
 
@@ -147,7 +147,7 @@ class PrivateUserApiTests(TestCase):
 
     def test_update_user_profile(self):
         """Test updating the user profile for the authenticated user"""
-        payload = {'name': 'updated name', 'password': 'newpassword123'}
+        payload = {'name': 'Updated name', 'password': 'newpassword123'}
 
         res = self.client.patch(ME_URL, payload)
 
