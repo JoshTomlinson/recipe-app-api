@@ -9,7 +9,7 @@ from core import models
 
 
 class UserAdmin(BaseUserAdmin):
-    """Define the admin pagers for users."""
+    """Define the admin pages for users."""
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
@@ -30,8 +30,8 @@ class UserAdmin(BaseUserAdmin):
     readonly_fields = ['last_login']
     add_fieldsets = (
         (None, {
-            'classs': ('wide',),
-            'fields':(
+            'classes': ('wide',),
+            'fields': (
                 'email',
                 'password1',
                 'password2',
@@ -39,9 +39,10 @@ class UserAdmin(BaseUserAdmin):
                 'is_active',
                 'is_staff',
                 'is_superuser',
-            )
+            ),
         }),
     )
 
-admin.site.register(models.User,UserAdmin)
+
+admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Recipe)

@@ -9,7 +9,7 @@ from core import models
 
 
 class ModelTests(TestCase):
-    """ Test models."""
+    """Test models."""
 
     def test_create_user_with_email_sucesful(self):
         """Test creating a user with an email is sucessful."""
