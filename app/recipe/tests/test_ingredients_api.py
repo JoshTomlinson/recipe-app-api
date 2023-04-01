@@ -23,8 +23,8 @@ def create_user(email='user@example.com', password='testpass123'):
     return get_user_model().objects.create_user(email=email, password=password)
 
 
-class PublicIngredientsAPITests(TestCase):
-    """Test unauthenticatd user requests."""
+class PublicIngredientsApiTests(TestCase):
+    """Test unauthenticated API requests."""
 
     def setUp(self):
         self.client = APIClient()
@@ -35,7 +35,7 @@ class PublicIngredientsAPITests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
-class PrivaeIngredientsAPITests(TestCase):
+class PrivateIngredientsApiTests(TestCase):
     """Test unauthenticated API requets."""
 
     def setUp(self):
@@ -55,10 +55,10 @@ class PrivaeIngredientsAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
-    def test_ingredients_limmited_to_user(self):
+    def test_ingredients_limited_to_user(self):
         """Test list of ingredients is limited to authenticated users."""
         user2 = create_user(email='user2@example.com')
-        Ingredient.objects.create(user=user2, name='salt')
+        Ingredient.objects.create(user=user2, name='Salt')
         ingredient = Ingredient.objects.create(user=self.user, name='Pepper')
 
         res = self.client.get(INGREDIENTS_URL)
@@ -70,9 +70,9 @@ class PrivaeIngredientsAPITests(TestCase):
 
     def test_update_ingredient(self):
         """Test updtaing an ingredient."""
-        ingredient =Ingredient.objects.create(user=self.user,name='Cilantro')
+        ingredient = Ingredient.objects.create(user=self.user, name='Cilantro')
 
-        payload = {'name':'Coriander'}
+        payload = {'name': 'Coriander'}
         url = detail_url(ingredient.id)
         res = self.client.patch(url, payload)
 
