@@ -67,10 +67,10 @@ class ModelTests(TestCase):
             title='Sample recipe name.',
             time_minutes=5,
             price=Decimal('5.50'),
-            description='sample recipe description',
+            description='sample receipe description',
         )
 
-        self.assertEqual(str(recipe),recipe.title)
+        self.assertEqual(str(recipe), recipe.title)
 
     def test_create_tag(self):
         """Test creating a tag is successful."""
@@ -84,18 +84,18 @@ class ModelTests(TestCase):
         user = create_user()
         ingredient = models.Ingredient.objects.create(
             user=user,
-            name='Ingerdient1'
+            name='Ingredient1'
         )
 
-        self.assertEqual(str(ingredient),ingredient.name)
+        self.assertEqual(str(ingredient), ingredient.name)
 
-        @patch('core.models.uuid.uuid4')
-        def test_recipe_file_name_uuid(self, mock_uuid):
-            """Test generating image path."""
-            uuid = 'test-uuid'
-            mock_uuid.return_value = uuid
-            file_path = models.recipe_image_file_path(None, 'example.jpg')
+    @patch('core.models.uuid.uuid4')
+    def test_recipe_file_name_uuid(self, mock_uuid):
+        """Test generating image path."""
+        uuid = 'test-uuid'
+        mock_uuid.return_value = uuid
+        file_path = models.recipe_image_file_path(None, 'example.jpg')
 
-            delf.assertEqual(file_path, f'uploads/recipe/{uuid}.jpg')
+        self.assertEqual(file_path, f'uploads/recipe/{uuid}.jpg')
 
 
